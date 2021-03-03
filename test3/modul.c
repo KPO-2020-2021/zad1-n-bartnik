@@ -1,4 +1,4 @@
-
+#include "modul.h"
 /*
  *  Zestaw wazniejszych stalych
  */
