@@ -41,7 +41,7 @@ int main() {
   
   if (Delta_2 > 0) {
 
-      Delta = sqrt( Delta_2 );
+      Delta = sqrt( Delta_2 ); /*Przy użyciu polecenia z g++ program uruchamia się i działa poprawnie, natomiast przy kompilacji z gcc należy dodać w poleceniu -lm na końcu, gdyż w C biblioteki matematyczne nie są linkowane automatycznie*/
       X1 = (-TKw.b - Delta) / (2*TKw.a);
       X2 = (-TKw.b + Delta) / (2*TKw.a);
       Ilosc_Pierwiastkow = 2;      
