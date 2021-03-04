@@ -66,7 +66,7 @@ int RozmiarNajdluzszegoSlowa(char* Tekst)
  *    Tekst - wskaznik na tekst, dla ktorego ma byc wyznaczona
  *            dlugosc najdluzszego slowa, ktore w nim sie znajduje.
  */
-void ZamienNaPodkreslenie(char* Tekst)
+void ZamienNaPodkreslenie(char * Tekst)
 {
   for (; *Tekst; ++Tekst)
       if (*Tekst == ' ') *Tekst = '_';
@@ -125,7 +125,11 @@ int IloscWielkichLiter(char *Tekst)
 
 int main()
 {
-  char *Napis = "Jak dobrze jest wstac skoro swit. Jutrzenki blask ...";
+  char Napis[] = "Jak dobrze jest wstac skoro swit. Jutrzenki blask ..."; 
+  /*Zamiana char *Napis na char Napis[]. Wynika to z zasad standardu C++.
+  Zadeklarowane literały znakowe zawsze będą stałe.
+  Jeżeli zapiszemy je do zmiennej wskaźnikowej nie będącej tablicą zostanie mu przydzielone tylko jedno miejsce w pamięci. 
+  Niemożliwa będzie ingerencja w napis. Modyfikacje umożliwia doopiero zapisanie literału w tablicy.*/
   int IloscSpacji;
   int DlugoscSlowaXXX;
   int IloscMaLiter = 0;
@@ -150,3 +154,8 @@ int main()
   printf("\n");
   return 0;
 }
+/*Po kompilacji za pomocą g++ -Wall -pedantic program.c wyświetla się komunikat dot. 128. linii pierwotnego kodu: 
+"ISO C++ forbids converting a string constant to ‘char*’"
+Po zastosowaniu opcji debuggera i skorzystaniu z pliku core można dowiedzieć się, że program pokazuje błędy przy funkcjach: ZamienNaPoskreslenie oraz main.
+Było to spowodowane zapisem literału jako char* Napis zamiast char Napis[].
+Przy pierwszej opcji niemożliwym była modyfikacja literału ze względu na to, że nie mieliśmy dostępu do całości napisu.*/
